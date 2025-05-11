@@ -36,3 +36,25 @@ void add(uint8_t * a,uint8_t * b,uint8_t * c)
     carry=(sum>>8)&0xFF;
   }
 }
+
+void sub(uint8_t * a,uint8_t * b,uint8_t * c)
+{
+  uint32_t i;
+  uint8_t carry;
+  carry=0;
+  for (i=0;i<BIGINT_SIZE;i++)
+  {
+    uint16_t sum;
+    if (a[i]>=b[i])
+    {
+      sum=a[i]-(b[i]+carry);
+      carry=0;
+    }
+    else
+    {
+      sum=a[i]+0x100-(b[i]+carry);
+      carry=1;
+    }
+    c[i]=sum&0xFF;
+  }
+}
