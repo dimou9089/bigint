@@ -3,7 +3,7 @@
 
 
 
-void mul(uint8_t * a,uint8_t * b,uint8_t * c)
+void mul(uint8_t * const a,uint8_t * const b,uint8_t * const c)
 {
   uint32_t i,j;
   uint8_t carry;
@@ -23,7 +23,7 @@ void mul(uint8_t * a,uint8_t * b,uint8_t * c)
   }
 }
 
-void add(uint8_t * a,uint8_t * b,uint8_t * c)
+void add(uint8_t * const a,uint8_t * const b,uint8_t * const c)
 {
   uint32_t i;
   uint8_t carry;
@@ -37,7 +37,7 @@ void add(uint8_t * a,uint8_t * b,uint8_t * c)
   }
 }
 
-void sub(uint8_t * a,uint8_t * b,uint8_t * c)
+void sub(uint8_t * const a,uint8_t * const b,uint8_t * const c)
 {
   uint32_t i;
   uint8_t carry;
@@ -57,4 +57,21 @@ void sub(uint8_t * a,uint8_t * b,uint8_t * c)
     }
     c[i]=sum&0xFF;
   }
+}
+
+int8_t cmp(const uint8_t * const a, const uint8_t * const b)
+{
+  uint32_t i;
+  for (i=BIGINT_SIZE-1;i>=0;i--)
+  {
+    if (a[i]>b[i])
+    {
+      return 1;
+    }
+    else if (a[i]<b[i])
+    {
+      return -1;
+    }
+  }
+  return 0;
 }
