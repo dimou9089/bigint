@@ -9,7 +9,7 @@ void mod(uint8_t * const a,uint8_t * const b,uint8_t * const c)
   uint32_t size,i;
   memcpy(c,a,sizeof(uint8_t)*BIGINT_SIZE);
   size=bigint_size(b);
-  for (i=0;i<BIGINT_SIZE-size;i++)
+  for (i=0;i<=BIGINT_SIZE-size;i++)
   {
     while (cmp_inplace(c,b,BIGINT_SIZE-size-i)>=0)
     {
@@ -60,7 +60,7 @@ void sub(uint8_t * const a,uint8_t * const b,uint8_t * const c)
   for (i=0;i<BIGINT_SIZE;i++)
   {
     uint16_t sum;
-    if (a[i]>=b[i])
+    if (a[i]>=b[i]+carry)
     {
       sum=a[i]-(b[i]+carry);
       carry=0;
@@ -99,7 +99,7 @@ void sub_inplace(uint8_t * const a,uint8_t * const b,const uint32_t shift)
   for (i=0;i<BIGINT_SIZE-shift;i++)
   {
     uint16_t sum;
-    if (a[i+shift]>=b[i])
+    if (a[i+shift]>=b[i]+carry)
     {
       sum=a[i+shift]-(b[i]+carry);
       carry=0;
