@@ -20,8 +20,8 @@ script_path=os.path.dirname(__file__)
 path=f"{script_path}/../../../build/bigint/fuzzing/libbigint_fuzzing.so"
 lib = ctypes.CDLL(path)
 
-lib.add.argtypes = [ctypes.POINTER(ctypes.c_uint8), ctypes.POINTER(ctypes.c_uint8),ctypes.POINTER(ctypes.c_uint8)]
-lib.add.restype = None
+lib.mod.argtypes = [ctypes.POINTER(ctypes.c_uint8), ctypes.POINTER(ctypes.c_uint8),ctypes.POINTER(ctypes.c_uint8)]
+lib.mod.restype = None
 
 size=64
 array=(ctypes.c_uint8 * size)
@@ -44,13 +44,10 @@ for i in range(nb_tests):
     c_param=array(*c)
 
 # Appel
-    lib.add(a_param,b_param,c_param)
+    lib.mod(a_param,b_param,c_param)
     c_int=concat(c_param)
 
-    s=a_int+b_int
-    maxi=(1<<64*8)
-    if s>=maxi:
-        s=s-maxi
+    s=a_int%b_int
 
     if c_int!=s:
         expected=hex(s).zfill(128)
@@ -61,6 +58,6 @@ for i in range(nb_tests):
         print("returned =",res)
         print("expected =",expected)
         print("test result :", c_int==s)
-        print("Résultat :", c_int==s)
+        print("test number :",i)
         break
 print(f"\r{nb_tests}/{nb_tests}")
