@@ -26,7 +26,7 @@ void mul(uint8_t * const a,uint8_t * const b,uint8_t * const c)
   for (i=0;i<BIGINT_SIZE;i++)
   {
     uint8_t tmp[BIGINT_SIZE];
-    memset(tmp,0,i);
+    memset(tmp,0,BIGINT_SIZE);
     for (j=0;j<BIGINT_SIZE-i;j++)
     {
       uint16_t prod;

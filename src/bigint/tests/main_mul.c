@@ -47,7 +47,7 @@ int main(void)
 {
   UNITY_BEGIN();
   RUN_TEST(test_mul_nominal);
-  //RUN_TEST(test_mul_carry);
-  //RUN_TEST(test_mul_overflow);
+  RUN_TEST(test_mul_carry);
+  RUN_TEST(test_mul_overflow);
   return UNITY_END();
 }
