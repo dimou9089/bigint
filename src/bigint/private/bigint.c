@@ -22,11 +22,11 @@ void mul(uint8_t * const a,uint8_t * const b,uint8_t * const c)
 {
   uint32_t i,j;
   uint8_t carry;
-  carry=0;
   for (i=0;i<BIGINT_SIZE;i++)
   {
     uint8_t tmp[BIGINT_SIZE];
     memset(tmp,0,BIGINT_SIZE);
+    carry=0;
     for (j=0;j<BIGINT_SIZE-i;j++)
     {
       uint16_t prod;
