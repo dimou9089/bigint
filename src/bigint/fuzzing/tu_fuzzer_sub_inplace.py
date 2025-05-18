@@ -51,7 +51,7 @@ for i in range(nb_tests):
         a_int,b_int=b_int,a_int
         a,b=swap(a,b)
     b=b[shift:]+[0]*shift
-    b_int=(b_int>>shift)<<shift
+    b_int=(b_int>>(8*shift))<<(8*shift)
     s=a_int-b_int
 
     a_param=array(*a)
@@ -60,7 +60,6 @@ for i in range(nb_tests):
 
 # Appel
     lib.sub_inplace(a_param,b_param,shift_param)
-    print(a_int)
 
     a_int=concat(a_param)
 
