@@ -29,8 +29,8 @@ script_path=os.path.dirname(__file__)
 path=f"{script_path}/../../../build/bigint/fuzzing/libbigint_fuzzing.so"
 lib = ctypes.CDLL(path)
 
-lib.sub.argtypes = [ctypes.POINTER(ctypes.c_uint8), ctypes.POINTER(ctypes.c_uint8),ctypes.POINTER(ctypes.c_uint8)]
-lib.sub.restype = None
+lib.sub_inplace.argtypes = [ctypes.POINTER(ctypes.c_uint8), ctypes.POINTER(ctypes.c_uint8),ctypes.c_uint32]
+lib.sub_inplace.restype = None
 
 size=64
 array=(ctypes.c_uint8 * size)
