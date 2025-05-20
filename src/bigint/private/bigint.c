@@ -127,6 +127,13 @@ int8_t cmp_inplace(const uint8_t * const a, const uint8_t * const b, const uint3
       return -1;
     }
   }
+  for (i=shift-1;i>=0;i--)
+  {
+    if (a[i]!=0)
+    {
+      return 1;
+    }
+  }
   return 0;
 }
 
