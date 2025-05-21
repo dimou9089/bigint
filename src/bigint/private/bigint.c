@@ -127,11 +127,14 @@ int8_t cmp_inplace(const uint8_t * const a, const uint8_t * const b, const uint3
       return -1;
     }
   }
-  for (i=shift-1;i>=0;i--)
+  if (shift!=0)
   {
-    if (a[i]!=0)
+    for (i=shift-1;i>=0;i--)
     {
-      return 1;
+      if (a[i]!=0)
+      {
+        return 1;
+      }
     }
   }
   return 0;
@@ -139,11 +142,16 @@ int8_t cmp_inplace(const uint8_t * const a, const uint8_t * const b, const uint3
 
 uint32_t bigint_size(const uint8_t * const bigint)
 {
-  uint32_t i;
+  uint32_t i,max;
   i=0;
-  while (i<BIGINT_SIZE && 0!=bigint[i])
+  max=0;
+  while (i<BIGINT_SIZE)
   {
+    if (bigint[i]!=0)
+    {
+      max=i+1;
+    }
     i++;
   }
-  return i;
+  return max;
 }
