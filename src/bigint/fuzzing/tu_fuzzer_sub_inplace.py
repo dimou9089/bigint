@@ -43,6 +43,7 @@ for i in range(nb_tests):
     a=[]
     b=[]
     shift=randint(0,63)
+    shift2=randint(0,shift)
 
     a_int=gen_int(a)
     b_int=gen_int(b)
@@ -51,12 +52,12 @@ for i in range(nb_tests):
         a_int,b_int=b_int,a_int
         a,b=swap(a,b)
     b=b[shift:]+[0]*shift
-    b_int=(b_int>>(8*shift))<<(8*shift)
+    b_int=(b_int>>(8*shift))<<(8*shift2)
     s=a_int-b_int
 
     a_param=array(*a)
     b_param=array(*b)
-    shift_param=(ctypes.c_uint32)(shift)
+    shift_param=(ctypes.c_uint32)(shift2)
 
 # Appel
     lib.sub_inplace(a_param,b_param,shift_param)
@@ -72,6 +73,8 @@ for i in range(nb_tests):
         print("b10 =",b_int)
         print("returned =",res)
         print("expected =",expected)
+        print("shift =",shift)
+        print("shift2 =",shift2)
         print("test result :", a_int==s)
         print("test number :",i)
         break
